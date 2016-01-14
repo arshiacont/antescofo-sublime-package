@@ -9,8 +9,8 @@ Move the resultant 'Antescofo' folder to ~/Library/Application Support/Sublime T
 
 ## Usage
 
-- CTRL+P without text selection will evaluate the line in Antescofo (will send OSC message to Antescofo with 'livecode' prepend)
-- CTRL+P with text selection will do the above on the entire selected text.
+- CTRL+p without text selection will evaluate the line in Antescofo (will send OSC message to Antescofo with 'livecode' prepend)
+- CTRL+p with text selection will do the above on the entire selected text.
 - CTRL+s : to 'start' Antescofo
 - CTRL+c : to 'stop' Antescofo
 
