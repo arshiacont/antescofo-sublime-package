@@ -12,23 +12,24 @@ Change *Antescofo.sublime-settings* to use non-default network parameters (we us
 
 ## Usage
 
-### Open Antescofo Communication
+#### Open Antescofo Communication
 
 Open *Antescofo* in either Max or Pd and initiate OSC communication from the object by sending 'ascograph open' to the object (or double-clicking on *Antescofo* object in case of Max).
 
-### Syntax Coloring
+#### Syntax Coloring
 
 By openning an Antescofo file with '.asco' or '.asco.txt' extension, the *Antescofo* syntax is automatically detected. You should see this at the bottom-right corner of the Sublime Text Editor. If not, just click there and choose *Antescofo*.
 Additionally, you should choose your favourite color scheme from 'Preferences -> Color Schemes -> Antescofo' (Courtesy of [Julia Blondeau](http://www.juliablondeau.fr/)!) 
 
-### Hot-Keys
+#### Hot-Keys
 
 The following short cuts are currently available on all platforms. You can easily change them by modifying the 'Default (OSX).sublime-keymap' file in the plugin folder (and other platforms accordingly). They are also available in the 'Tools' menu.
 
-- alt+p without text selection will evaluate the line in Antescofo (will send OSC message to Antescofo with 'livecode' prepend)
-- alt+p with text selection will do the above on the entire selected text.
-- alt+s : to 'start' Antescofo
-- alt+c : to 'stop' Antescofo
+- **alt+p** without text selection will evaluate the line in Antescofo (will send OSC message to Antescofo with 'playstring' prepend)
+- **alt+p** with text selection will do the above on the entire selected text.
+- **alt+s** : to 'start' Antescofo
+- **alt+c** : to 'stop' Antescofo
+- **alt+l** : Loads the current file remotely in Antescofo object (Sublime Text 3 only!)
 
 ## Problems or Suggestions?
 
