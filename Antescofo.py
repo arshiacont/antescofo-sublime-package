@@ -2,65 +2,125 @@ import sublime, sublime_plugin
 import sys
 import os
 
+pyosc = 1
 # pyosc is the folder in our plugin
-sys.path.append(os.path.join(os.path.dirname(__file__), "pyosc"))
-import OSC
+if sys.version_info < (3, 3):
+    sys.path.append(os.path.join(os.path.dirname(__file__), "pyosc"))
+    import OSC
+else:
+    # pythonosc
+    sys.path.append(os.path.join(os.path.dirname(__file__), "python-osc-1.4.2"))
+    from pythonosc import osc_message_builder
+    from pythonosc import udp_client
+    pyosc = 0
 
 # Extends CMD+SHIFT+p to use OSC to send to Antescofo  
 class OscsendCommand(sublime_plugin.TextCommand):  
-    def run(self, edit):          
+    def run(self, edit):
+        self.settings = sublime.load_settings('Antescofo.sublime-settings')
+        address = self.settings.get('address', 'localhost')    
+        port = self.settings.get('port', 5678)    
         # Walk through each region in the selection  
         for region in self.view.sel():
             # If no region, then just send the line!
             if region.empty():  
-                print 'Region is empty'
                 # Expand the region to the full line it resides on, excluding the newline  
                 line = self.view.line(region) 
                 # Extract the string for the line, and add a newline  
-                lineContents = self.view.substr(line) + '\n'
-                ## Send using pyosc
-                client = OSC.OSCClient()
-                client.connect(('localhost', 5678))
-                oscmsg = OSC.OSCMessage('/antescofo/cmd')
-                oscmsg.append('livecode')
-                oscmsg.append(lineContents)
-                client.send(oscmsg)
-                print oscmsg
+                Contents = self.view.substr(line) + '\n'
             else :
-                print 'Region is not empty'
                 # if region, then send the region
                 # Get the selected text  
-                RegionContents = self.view.substr(region) + '\n'
+                Contents = self.view.substr(region) + '\n'
+
+            # Send OSC message
+            if pyosc:
                 ## Send using pyosc
                 client = OSC.OSCClient()
-                client.connect(('localhost', 5678))
+                client.connect((address, port))
                 oscmsg = OSC.OSCMessage('/antescofo/cmd')
-                oscmsg.append('livecode')
-                oscmsg.append(RegionContents)
+                oscmsg.append('playstring')
+                oscmsg.append(Contents)
                 client.send(oscmsg)
-                print oscmsg
+            else :
+                client = udp_client.UDPClient(address, port)
+                oscmsg = osc_message_builder.OscMessageBuilder(address = "/antescofo/cmd")
+                oscmsg.add_arg("playstring")
+                oscmsg.add_arg(Contents)
+                oscmsg = oscmsg.build()
+                client.send(oscmsg)
 
 
 
 # ctrl+s to START Antescofo via OSC 
 class StartantescofoCommand(sublime_plugin.WindowCommand):  
     def run(self):
-        print 'Starting Antescofo...'
-        client = OSC.OSCClient()
-        client.connect(('localhost', 5678))
-        oscmsg = OSC.OSCMessage("/antescofo/cmd")
-        oscmsg.append('start')
-        client.send(oscmsg)
-        print oscmsg
+        print('Starting Antescofo...')
+        self.settings = sublime.load_settings('Antescofo.sublime-settings')
+        address = self.settings.get('address', 'localhost')    
+        port = self.settings.get('port', 5678)    
+        if pyosc:
+            ## Use pyosc
+            client = OSC.OSCClient()
+            client.connect((address, port))
+            oscmsg = OSC.OSCMessage("/antescofo/cmd")
+            oscmsg.append('start')
+            client.send(oscmsg)
+        else:
+            ## use pythonosc
+            client = udp_client.UDPClient(address, port)
+            oscmsg = osc_message_builder.OscMessageBuilder(address = "/antescofo/cmd")
+            oscmsg.add_arg("start")
+            oscmsg = oscmsg.build()
+            client.send(oscmsg)
 
 # ctrl+s to START Antescofo via OSC 
 class StopantescofoCommand(sublime_plugin.WindowCommand):  
     def run(self):
-        print 'Starting Antescofo...'
-        client = OSC.OSCClient()
-        client.connect(('localhost', 5678))
-        oscmsg = OSC.OSCMessage("/antescofo/cmd")
-        oscmsg.append('stop')
-        client.send(oscmsg)
-        print oscmsg
+        print('Stop Antescofo...')
+        self.settings = sublime.load_settings('Antescofo.sublime-settings')
+        address = self.settings.get('address', 'localhost')    
+        port = self.settings.get('port', 5678) 
+        if pyosc:
+            ## Use pyosc
+            client = OSC.OSCClient()
+            client.connect((address, port))
+            oscmsg = OSC.OSCMessage("/antescofo/cmd")
+            oscmsg.append('stop')
+            client.send(oscmsg)
+        else:
+            ## use pythonosc
+            client = udp_client.UDPClient(address, port)
+            oscmsg = osc_message_builder.OscMessageBuilder(address = "/antescofo/cmd")
+            oscmsg.add_arg("stop")
+            oscmsg = oscmsg.build()
+            client.send(oscmsg)
+
+# ctrl+l to load current file in Antescofo
+class Loadantescofo(sublime_plugin.WindowCommand):
+    def run(self):
+        if sublime.version()==u'2221':
+            print('Can not load file in ST2')
+        else:
+            self.settings = sublime.load_settings('Antescofo.sublime-settings')
+            address = self.settings.get('address', 'localhost')    
+            port = self.settings.get('port', 5678) 
+            filename = self.window.extract_variables()['file']
+            print('Antescofo Loading ', filename)
+            if pyosc:
+                ## Use pyosc
+                client = OSC.OSCClient()
+                client.connect((address, port))
+                oscmsg = OSC.OSCMessage("/antescofo/cmd")
+                oscmsg.append('score')
+                oscmsg.append(filename)
+                client.send(oscmsg)
+            else:
+                ## use pythonosc
+                client = udp_client.UDPClient(address, port)
+                oscmsg = osc_message_builder.OscMessageBuilder(address = "/antescofo/cmd")
+                oscmsg.add_arg("score")
+                oscmsg.add_arg(filename)
+                oscmsg = oscmsg.build()
+                client.send(oscmsg)
                 

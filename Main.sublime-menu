@@ -4,9 +4,10 @@
     "children":
     [
     	{"id": "wrap"},
-        { "command": "oscsend", "caption": "Send to Antescofo (OSC)" },
+        { "command": "loadantescofo", "caption": "Load Antescofo Score" },
         { "command": "startantescofo", "caption": "Start Antescofo" },
-        { "command": "stopantescofo", "caption": "Stop Antescofo" }
+        { "command": "stopantescofo", "caption": "Stop Antescofo" },
+        { "command": "oscsend", "caption": "Send to Antescofo (OSC)" }
     ]
 }
 ]
