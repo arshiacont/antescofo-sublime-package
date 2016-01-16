@@ -14,7 +14,7 @@ patterns:
     '4': {name: entity.name.function.antescofo}
   match: '@(\b(?i:(fun_def|pattern_def|macro_def|proc_def|obj_def|map|tab|during|where|within))\b)(\s+)((\w|@|\::)*)'
   name: storage.type.class.Antescofo
-- {match: '\b(?i:case|let|loop|if|else|whenever|curve|group|expr|nim|forall)\b', name: keyword.control.antescofo}
+- {match: '\b(?i:case|let|loop|lfwd|if|else|whenever|curve|group|gfwd|fwd|pfwd|expr|nim|forall)\b', name: keyword.control.antescofo}
 - {match: (\$)\w*, name: varAsco.language.antescofo}
 - {match: '\b(?i:note|chord|multi|trill|event|state|bpm)\b', name: constant.language.antescofo}
 - {match: '@\b(?i:cos|sin|abs|action|grain|target|local|global|type|refractory|is_undef|is_bool|is_string|is_symbol|is_int|is_float|
