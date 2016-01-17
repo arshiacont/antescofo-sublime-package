@@ -18,8 +18,8 @@ else:
 class OscsendCommand(sublime_plugin.TextCommand):  
     def run(self, edit):
         self.settings = sublime.load_settings('Antescofo.sublime-settings')
-        address = self.settings.get('address', 'localhost')    
-        port = self.settings.get('port', 5678)    
+        address = self.settings.get('antescofoip', 'localhost')    
+        port = self.settings.get('antescofoport', 5678)    
         # Walk through each region in the selection  
         for region in self.view.sel():
             # If no region, then just send the line!
@@ -57,8 +57,8 @@ class StartantescofoCommand(sublime_plugin.WindowCommand):
     def run(self):
         print('Starting Antescofo...')
         self.settings = sublime.load_settings('Antescofo.sublime-settings')
-        address = self.settings.get('address', 'localhost')    
-        port = self.settings.get('port', 5678)    
+        address = self.settings.get('antescofoip', 'localhost')    
+        port = self.settings.get('antescofoport', 5678)    
         if pyosc:
             ## Use pyosc
             client = OSC.OSCClient()
@@ -79,8 +79,8 @@ class StopantescofoCommand(sublime_plugin.WindowCommand):
     def run(self):
         print('Stop Antescofo...')
         self.settings = sublime.load_settings('Antescofo.sublime-settings')
-        address = self.settings.get('address', 'localhost')    
-        port = self.settings.get('port', 5678) 
+        address = self.settings.get('antescofoip', 'localhost')    
+        port = self.settings.get('antescofoport', 5678) 
         if pyosc:
             ## Use pyosc
             client = OSC.OSCClient()
@@ -103,24 +103,26 @@ class Loadantescofo(sublime_plugin.WindowCommand):
             print('Can not load file in ST2')
         else:
             self.settings = sublime.load_settings('Antescofo.sublime-settings')
-            address = self.settings.get('address', 'localhost')    
-            port = self.settings.get('port', 5678) 
+            address = self.settings.get('antescofoip', 'localhost')    
+            port = self.settings.get('antescofoport', 5678) 
+
+            ascographip = self.settings.get('ascographip', 'localhost') 
+            ascographport = self.settings.get('ascographport', 6789) 
+
             filename = self.window.extract_variables()['file']
             print('Antescofo Loading ', filename)
-            if pyosc:
-                ## Use pyosc
-                client = OSC.OSCClient()
-                client.connect((address, port))
-                oscmsg = OSC.OSCMessage("/antescofo/cmd")
-                oscmsg.append('score')
-                oscmsg.append(filename)
-                client.send(oscmsg)
-            else:
-                ## use pythonosc
-                client = udp_client.UDPClient(address, port)
-                oscmsg = osc_message_builder.OscMessageBuilder(address = "/antescofo/cmd")
-                oscmsg.add_arg("score")
-                oscmsg.add_arg(filename)
-                oscmsg = oscmsg.build()
-                client.send(oscmsg)
+            ## use pythonosc
+            # Send to Antescofo object in Max/Pd
+            client = udp_client.UDPClient(address, port)
+            oscmsg = osc_message_builder.OscMessageBuilder(address = "/antescofo/cmd")
+            oscmsg.add_arg("score")
+            oscmsg.add_arg(filename)
+            oscmsg = oscmsg.build()
+            client.send(oscmsg)
+            # Send to AscoGraph if any
+            ascoclient = udp_client.UDPClient(ascographip, ascographport)
+            oscmsg2 = osc_message_builder.OscMessageBuilder(address = "/antescofo/loadscore")
+            oscmsg2.add_arg(filename)
+            oscmsg2 = oscmsg.build()
+            ascoclient.send(oscmsg2)
                 

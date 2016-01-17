@@ -1,4 +1,6 @@
 {
-	"address": "localhost",
-	"port": 5678
+	"antescofoip": "localhost",
+	"antescofoport": 5678,
+	"ascographip": "localhost",
+	"ascographpost": 6789
 }
