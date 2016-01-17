@@ -97,21 +97,36 @@ class StopantescofoCommand(sublime_plugin.WindowCommand):
             client.send(oscmsg)
 
 # ctrl+l to load current file in Antescofo
-class Loadantescofo(sublime_plugin.WindowCommand):
-    def run(self):
-        if sublime.version()==u'2221':
-            print('Can not load file in ST2')
+class Loadantescofo(sublime_plugin.TextCommand):
+    def run(self, edit):
+        self.settings = sublime.load_settings('Antescofo.sublime-settings')
+        address = self.settings.get('antescofoip', 'localhost')    
+        port = self.settings.get('antescofoport', 5678) 
+
+        ascographip = self.settings.get('ascographip', 'localhost') 
+        ascographport = self.settings.get('ascographport', 6789)
+    
+        filename = self.view.file_name()
+        print('Antescofo Loading ', filename)
+
+        if pyosc:
+            # We are in Sublime 2!
+            # send to Antescofo Max/Pd objects
+            client = OSC.OSCClient()
+            client.connect((address, port))
+            oscmsg = OSC.OSCMessage('/antescofo/cmd')
+            oscmsg.append('score')
+            oscmsg.append(filename)
+            client.send(oscmsg)
+            # send to Ascograph
+            ascoclient = OSC.OSCClient()
+            ascoclient.connect((ascographip, ascographport))
+            oscmsg2 = OSC.OSCMessage('/antescofo/loadscore')
+            oscmsg2.append(filename)
+            ascoclient.send(oscmsg2)
         else:
-            self.settings = sublime.load_settings('Antescofo.sublime-settings')
-            address = self.settings.get('antescofoip', 'localhost')    
-            port = self.settings.get('antescofoport', 5678) 
-
-            ascographip = self.settings.get('ascographip', 'localhost') 
-            ascographport = self.settings.get('ascographport', 6789) 
-
-            filename = self.window.extract_variables()['file']
-            print('Antescofo Loading ', filename)
-            ## use pythonosc
+            # We are in Sublime 3 / use PythonOSC
+            #filename = self.window.extract_variables()['file']
             # Send to Antescofo object in Max/Pd
             client = udp_client.UDPClient(address, port)
             oscmsg = osc_message_builder.OscMessageBuilder(address = "/antescofo/cmd")
@@ -125,4 +140,8 @@ class Loadantescofo(sublime_plugin.WindowCommand):
             oscmsg2.add_arg(filename)
             oscmsg2 = oscmsg.build()
             ascoclient.send(oscmsg2)
+
+        ## We can use is_dirty to check if they are unsaved changes! TODO
+        #print('File_name is ', self.view.file_name(), ' is_dirty? ', self.view.is_dirty())
+            
                 
