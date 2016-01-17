@@ -1,9 +1,9 @@
 # antescofo-sublime-package
-Antescofo Language Package and Plugins for Sublime Text Editor 2 and 3.
+[Antescofo Language](http://repmus.ircam.fr/antescofo) Package and Plugins for [Sublime Text Editor](http://www.sublimetext.com) v2 and v3.
 
 Using [pyOSC](https://trac.v2.nl/wiki/pyOSC) package for Sublime Text 2 and [Python-OSC](https://github.com/attwad/python-osc) for Sublime Text 3 (automatically) for communications to *Antescofo* objects in Max/Pd.
 
-Change *Antescofo.sublime-settings* to use non-default network parameters (we use 'localhost' on port 5678 by default).
+Change *Antescofo.sublime-settings* to use non-default network parameters (we use 'localhost' on port 5678 for Antescofo object and port 6789 for Ascograph by default).
 
 ## Installation
 
