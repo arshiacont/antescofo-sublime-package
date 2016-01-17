@@ -29,7 +29,7 @@ The following short cuts are currently available on all platforms. You can easil
 - **alt+p** with text selection will do the above on the entire selected text.
 - **alt+s** : to 'start' Antescofo
 - **alt+c** : to 'stop' Antescofo
-- **alt+l** : Loads the current file remotely in Antescofo object (Sublime Text 3 only!)
+- **alt+l** : Loads the current file remotely in Antescofo object (Max/Pd) and Ascograph
 
 ## Problems or Suggestions?
 
