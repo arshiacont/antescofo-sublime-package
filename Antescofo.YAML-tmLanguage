@@ -12,12 +12,12 @@ patterns:
       name: punctuation.definition.comment.antescofo
   match: (;|//).*$\n?
   name: comment.line.semicolon.antescofo
-- captures:
+- match: '@(\b(?i:(fun_def|pattern_def|macro_def|proc_def|obj_def|map|tab|during|where|within))\b)(\s+)((\w|@|\::)*)'
+  captures:
     '2':
       name: storage.type.function-type.antescofo
     '4':
       name: entity.name.function.antescofo
-  match: '@(\b(?i:(fun_def|pattern_def|macro_def|proc_def|obj_def|map|tab|during|where|within))\b)(\s+)((\w|@|\::)*)'
   name: storage.type.class.Antescofo
 - match: \b(?i:case|let|loop|lfwd|if|else|whenever|curve|group|gfwd|fwd|pfwd|expr|nim|forall|abort|kill)\b
   name: keyword.control.antescofo
