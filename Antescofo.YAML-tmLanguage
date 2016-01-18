@@ -1,44 +1,57 @@
 comment: ''
-fileTypes: [asco, asco.txt]
+fileTypes:
+- asco
+- asco.txt
 foldingStartMarker: \(
 foldingStopMarker: \)
 keyEquivalent: ^~L
 name: Antescofo
 patterns:
 - captures:
-    '1': {name: punctuation.definition.comment.antescofo}
+    '1':
+      name: punctuation.definition.comment.antescofo
   match: (;|//).*$\n?
   name: comment.line.semicolon.antescofo
 - captures:
-    '2': {name: storage.type.function-type.antescofo}
-    '4': {name: entity.name.function.antescofo}
+    '2':
+      name: storage.type.function-type.antescofo
+    '4':
+      name: entity.name.function.antescofo
   match: '@(\b(?i:(fun_def|pattern_def|macro_def|proc_def|obj_def|map|tab|during|where|within))\b)(\s+)((\w|@|\::)*)'
   name: storage.type.class.Antescofo
-- {match: '\b(?i:case|let|loop|lfwd|if|else|whenever|curve|group|gfwd|fwd|pfwd|expr|nim|forall)\b', name: keyword.control.antescofo}
-- {match: (\$)\w*, name: varAsco.language.antescofo}
-- {match: '\b(?i:note|chord|multi|trill|event|state|bpm)\b', name: constant.language.antescofo}
-- {match: '@\b(?i:cos|sin|abs|action|grain|target|local|global|type|refractory|is_undef|is_bool|is_string|is_symbol|is_int|is_float|
-    is_numeric|is_map|is_interpolatedmap|is_tab|is_fct|atan|cos|cosh|exp|log|max|min|pow|sqrt|floor|log10|log2|ceil|sinh|sin|tan|car|cdr|clear|concat|cons|count|dim|find_index|flatten|insert|lace|map|member|min_val|max_val|normalize|occurs|permute|push_back|push_front|rank|reduce|remove|remove_duplicate|replace|reshape|resize|reverse|rotate|scan|scramble|sort|size|sputter|stutter|iota)\b',
-  name: support.function.antescofo}
-- {match: '\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|([0-9]*\w)|(\.[0-9]+))((e|E)(\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\b',
-  name: constant.numeric.antescofo}
+- match: \b(?i:case|let|loop|lfwd|if|else|whenever|curve|group|gfwd|fwd|pfwd|expr|nim|forall|abort|kill)\b
+  name: keyword.control.antescofo
+- match: (\$)\w*
+  name: varAsco.language.antescofo
+- match: \b(?i:note|chord|multi|trill|event|state|bpm)\b
+  name: constant.language.antescofo
+- match: '@\b(?i:cos|sin|abs|action|grain|target|local|global|type|refractory|is_undef|is_bool|is_string|is_symbol|is_int|is_float|is_numeric|is_map|is_interpolatedmap|is_tab|is_fct|atan|cos|cosh|exp|log|max|min|pow|sqrt|floor|log10|log2|ceil|sinh|sin|tan|car|cdr|clear|concat|cons|count|dim|find_index|flatten|insert|lace|map|member|min_val|max_val|normalize|occurs|permute|push_back|push_front|rank|reduce|remove|remove_duplicate|replace|reshape|resize|reverse|rotate|scan|scramble|sort|size|sputter|stutter|iota)\b'
+  name: support.function.antescofo
+- match: \b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|([0-9]*\w)|(\.[0-9]+))((e|E)(\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\b
+  name: constant.numeric.antescofo
 - begin: /\*
   beginCaptures:
-    '0': {name: comment.definition.string.begin.antescofo}
+    '0':
+      name: comment.definition.string.begin.antescofo
   end: \*/
   endCaptures:
-    '0': {name: comment.definition.string.end.antescofo}
+    '0':
+      name: comment.definition.string.end.antescofo
   name: comment.line.semicolon.antescofo
   patterns:
-  - {match: \\., name: comment.line.semicolon.antescofo}
+  - match: \\.
+    name: comment.line.semicolon.antescofo
 - begin: '"'
   beginCaptures:
-    '0': {name: punctuation.definition.string.begin.antescofo}
+    '0':
+      name: punctuation.definition.string.begin.antescofo
   end: '"'
   endCaptures:
-    '0': {name: punctuation.definition.string.end.antescofo}
+    '0':
+      name: punctuation.definition.string.end.antescofo
   name: constant.language.antescofo
   patterns:
-  - {match: \\., name: constant.language.antescofo}
+  - match: \\.
+    name: constant.language.antescofo
 scopeName: source.antescofo
 uuid: 00D451C9-6B1D-11D9-8DFA-000D93589AF6
