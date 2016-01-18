@@ -25,11 +25,11 @@ Additionally, you should choose your favourite color scheme from 'Preferences ->
 
 The following short cuts are currently available on all platforms. You can easily change them by modifying the 'Default (OSX).sublime-keymap' file in the plugin folder (and other platforms accordingly). They are also available in the 'Tools' menu.
 
-- **alt+p** without text selection will evaluate the line in Antescofo (will send OSC message to Antescofo with 'playstring' prepend)
-- **alt+p** with text selection will do the above on the entire selected text.
-- **alt+s** : to 'start' Antescofo
-- **alt+c** : to 'stop' Antescofo
-- **alt+l** : Loads the current file remotely in Antescofo object (Max/Pd) and Ascograph
+- <kbd>alt+p</kbd> without text selection will evaluate the line in Antescofo (will send OSC message to Antescofo with 'playstring' prepend)
+- <kbd>alt+p</kbd> with text selection will do the above on the entire selected text.
+- <kbd>alt+s</kbd> : to 'start' Antescofo
+- <kbd>alt+c</kbd> : to 'stop' Antescofo
+- <kbd>alt+l</kbd> : Loads the current file remotely in Antescofo object (Max/Pd) and Ascograph
 
 ## Problems or Suggestions?
 
