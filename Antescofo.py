@@ -58,7 +58,7 @@ class StartantescofoCommand(sublime_plugin.WindowCommand):
         print('Starting Antescofo...')
         self.settings = sublime.load_settings('Antescofo.sublime-settings')
         address = self.settings.get('antescofoip', 'localhost')    
-        port = self.settings.get('antescofoport', 5678)    
+        port = self.settings.get('antescofoport', 5678) 
         if pyosc:
             ## Use pyosc
             client = OSC.OSCClient()
@@ -138,7 +138,7 @@ class Loadantescofo(sublime_plugin.TextCommand):
             ascoclient = udp_client.UDPClient(ascographip, ascographport)
             oscmsg2 = osc_message_builder.OscMessageBuilder(address = "/antescofo/loadscore")
             oscmsg2.add_arg(filename)
-            oscmsg2 = oscmsg.build()
+            oscmsg2 = oscmsg2.build()
             ascoclient.send(oscmsg2)
 
         ## We can use is_dirty to check if they are unsaved changes! TODO
