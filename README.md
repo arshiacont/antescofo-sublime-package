@@ -7,10 +7,23 @@ Change *Antescofo.sublime-settings* to use non-default network parameters (we us
 
 ## Installation
 
+### Using Package Control
+
+- Make sure you have [Package Control](https://packagecontrol.io/installation) installed in your Sublime Text
+- This package is part of [Package Control Packages](https://packagecontrol.io/packages/Antescofo). See [Instructions](https://packagecontrol.io/docs/usage) for installation within ST. 
+
+### Manual Installation
+
 - Download the ZIP archive from the link above
 - Move the resultant 'Antescofo' folder to '~/Library/Application Support/Sublime Text 2/Packages/' (same with Sublime Text 3)
 
 ## Usage
+
+#### Plugin Settings and key Maps
+
+You can modify the plugin setting stored in *antescofo.sublime-settings* file by creating a new one and putting it in the *Packages/User/* folder. This setting contains Antescofo IP and port (default: 'localhost', 5678) and AscoGraph IP and port (default: 'localhost', 6789). Similarly, you can modify the key maps.
+
+<span style="colot:red;">Note for ST3 and Package Control Users:</span>span> When using ST3 and Package Control, the package is *packed* by default and you won't see the plugin folder! You can still download the setting and keymap files from this page and add them to the *Packages/User/* for your settings.
 
 #### Open Antescofo Communication
 
