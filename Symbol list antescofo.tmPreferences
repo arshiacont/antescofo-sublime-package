@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
    <key>name</key>
-   <string>Symbol List</string>
+   <string>Asco Symbol List</string>
    <key>scope</key>
-   <string>punctuation.definition.comment.antescofo, entity.name.function.antescofo, keyword.control.antescofo </string>
+   <string>source.antescofo labeled.textslm label.antescofo</string>
    <key>settings</key>
    <dict>
       <key>showInSymbolList</key>

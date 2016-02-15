@@ -49,6 +49,20 @@
 		</dict>
 		<dict>
 			<key>name</key>
+			<string>keywords</string>
+			<key>scope</key>
+			<string>label.antescofo</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#0000F0</string>
+				<key>fontStyle</key>
+				<string>bold</string>
+
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
 			<string>StringNumber</string>
 			<key>scope</key>
 			<string>string</string>
