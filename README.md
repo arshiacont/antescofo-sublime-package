@@ -44,6 +44,10 @@ The following short cuts are currently available on all platforms. You can easil
 - <kbd>alt+c</kbd> : to 'stop' Antescofo
 - <kbd>alt+l</kbd> : Loads the current file remotely in Antescofo object (Max/Pd) and Ascograph
 
+#### Event navigation
+To jump directly to an event in your score :
+- <kbd>cmd+r</kbd> opens a menu with all the events in the score. 
+
 ## Problems or Suggestions?
 
 Create an [Issue](https://github.com/arshiacont/antescofo-sublime-package/issues) and we will get back to you swiftly!

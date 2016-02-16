@@ -25,6 +25,44 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
+					<string>constant.language.antescofo</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>label.antescofo</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>^\s*(NOTE)\s+(\b.+?\b)\s+(\b.+?\b)\s+(\b.+?\b)</string>
+			<key>name</key>
+			<string>labeled.textslm</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>constant.language.antescofo</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>label.antescofo</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>^\s*(CHORD|TRILL)\s+(\(.+?\))\s+(\b.+?\b)\s+(\b.+?\b)</string>
+			<key>name</key>
+			<string>labeled.textslm</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
 					<string>punctuation.definition.comment.antescofo</string>
 				</dict>
 			</dict>
