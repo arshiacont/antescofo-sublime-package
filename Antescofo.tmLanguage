@@ -53,7 +53,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>^\s*(CHORD|TRILL)\s+(\(.+?\))\s+(\b.+?\b)\s+(\b.+?\b)</string>
+			<string>^\s*(CHORD|TRILL|MULTI)\s+(\(.+?\))\s+(\b.+?\b)\s+(\b.+?\b)</string>
 			<key>name</key>
 			<string>labeled.textslm</string>
 		</dict>
