@@ -28,6 +28,7 @@ class OscsendCommand(sublime_plugin.TextCommand):
                 line = self.view.line(region) 
                 # Extract the string for the line, and add a newline  
                 Contents = self.view.substr(line) + '\n'
+
             else :
                 # if region, then send the region
                 # Get the selected text  
@@ -73,6 +74,51 @@ class StartantescofoCommand(sublime_plugin.WindowCommand):
             oscmsg.add_arg("start")
             oscmsg = oscmsg.build()
             client.send(oscmsg)
+
+# ctrl+shift+s for STARTFROMLABEL via OSC
+#   The cursor must be on an EVENT containing a Label!
+class StartfromlabelCommand(sublime_plugin.TextCommand):
+    def run(self, edit):
+        self.settings = sublime.load_settings('Antescofo.sublime-settings')
+        address = self.settings.get('antescofoip', 'localhost')    
+        port = self.settings.get('antescofoport', 5678)    
+        # Walk through each region in the selection  
+        for region in self.view.sel():
+            # If no region, then it is a LINE
+            if region.empty():  
+                # Expand the region to the full line it resides on, excluding the newline  
+                line = self.view.line(region) 
+                scope_name = 'source.antescofo labeled.textslm label.antescofo '
+                label = None
+                for r in self.view.find_by_selector(scope_name):
+                    if r.intersects(line):
+                        label = self.view.substr(r)
+                        print(label)
+                        break
+                if label is None :
+                    print('Antescofo: No label at current position!')
+                else:
+                    print('Antescofo startfromlabel ', label)
+                    if pyosc:
+                        ## Use pyosc
+                        client = OSC.OSCClient()
+                        client.connect((address, port))
+                        oscmsg = OSC.OSCMessage("/antescofo/cmd")
+                        oscmsg.append('startfromlabel')
+                        oscmsg.append(label)
+                        client.send(oscmsg)
+                    else:
+                        ## use pythonosc
+                        client = udp_client.UDPClient(address, port)
+                        oscmsg = osc_message_builder.OscMessageBuilder(address = "/antescofo/cmd")
+                        oscmsg.add_arg("startfromlabel")
+                        oscmsg.add_arg(label)
+                        oscmsg = oscmsg.build()
+                        client.send(oscmsg)
+            else :
+                print('Antescofo Startfromlabel Command does not work on Regions!')
+        
+                
 
 # ctrl+s to START Antescofo via OSC 
 class StopantescofoCommand(sublime_plugin.WindowCommand):  
