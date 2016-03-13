@@ -40,9 +40,14 @@ The following short cuts are currently available on all platforms. You can easil
 
 - <kbd>alt+p</kbd> without text selection will evaluate the line in Antescofo (will send OSC message to Antescofo with 'playstring' prepend)
 - <kbd>alt+p</kbd> with text selection will do the above on the entire selected text.
-- <kbd>alt+s</kbd> : to 'start' Antescofo
-- <kbd>alt+c</kbd> : to 'stop' Antescofo
+- <kbd>alt+s</kbd> : to remotely 'start' Antescofo score
+- <kbd>alt+shift+s</kbd> : 'startfromlabel' if cursor is on an event with a given label
+- <kbd>alt+c</kbd> : to remotely 'stop' Antescofo
 - <kbd>alt+l</kbd> : Loads the current file remotely in Antescofo object (Max/Pd) and Ascograph
+
+#### Event navigation
+To jump directly to an event in your score :
+- <kbd>cmd+r</kbd> opens a menu with all the events in the score. 
 
 ## Problems or Suggestions?
 

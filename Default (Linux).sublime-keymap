@@ -10,5 +10,8 @@
   	},
     {
     	"keys": ["alt+l"], "command": "loadantescofo"
-  	}
+  	},
+    {
+      "keys": ["alt+shift+s"], "command": "startfromlabel"
+    }
 ]
