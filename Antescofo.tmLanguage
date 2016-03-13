@@ -53,7 +53,11 @@
 				</dict>
 			</dict>
 			<key>match</key>
+<<<<<<< HEAD
 			<string>^\s*(CHORD|TRILL|MULTI)\s+(\(.+?\))\s+(\b.+?\b)\s+(("[^"]*")|(\b[^\s]*\b))</string>
+=======
+			<string>^\s*(CHORD|TRILL|MULTI)\s+(\(.+?\))\s+(\b.+?\b)\s+(\b.+?\b)</string>
+>>>>>>> arshiacont/master
 			<key>name</key>
 			<string>labeled.textslm</string>
 		</dict>
