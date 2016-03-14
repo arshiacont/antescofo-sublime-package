@@ -34,7 +34,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>^\s*(NOTE)\s+(\b.+?\b)\s+(\b.+?\b)\s+(\b.+?\b)</string>
+			<string>^\s*(NOTE)\s+(\b.+?\b)\s+(\b.+?\b)\s+(("[^"]*")|(\b[^\s]*\b))</string>
 			<key>name</key>
 			<string>labeled.textslm</string>
 		</dict>
@@ -53,7 +53,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>^\s*(CHORD|TRILL|MULTI)\s+(\(.+?\))\s+(\b.+?\b)\s+(\b.+?\b)</string>
+			<string>^\s*(CHORD|TRILL|MULTI)\s+(\(.+?\))\s+(\b.+?\b)\s+(("[^"]*")|(\b[^\s]*\b))</string>
 			<key>name</key>
 			<string>labeled.textslm</string>
 		</dict>
